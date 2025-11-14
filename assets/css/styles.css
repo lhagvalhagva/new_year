@@ -404,70 +404,173 @@ img {
   display: none !important;
 }
 
-/*=============== INVITATION MODAL ===============*/
-.invitation-modal {
-  position: fixed;
-  z-index: 1000; /* High z-index to be on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.invitation-modal.show-modal {
-  opacity: 1;
-  visibility: visible;
-}
-
-.invitation-modal__content {
+/*=============== GREET CARD ===============*/
+.greet-card {
   background-color: var(--first-color-dark);
-  margin: auto;
-  padding: 3rem 2rem;
-  border-radius: 1rem;
-  text-align: center;
-  position: relative;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.3);
-}
-
-.invitation-modal__close {
-  color: var(--text-color);
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  font-size: 2rem;
-  font-weight: var(--font-bold);
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.invitation-modal__close:hover,
-.invitation-modal__close:focus {
-  color: var(--title-color);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.invitation-modal__message {
-  color: var(--title-color);
-  font-family: var(--second-font);
-  font-size: var(--h1-font-size);
+  border-radius: 1.75rem;
+  padding: 2rem 2.5rem;
   margin-bottom: 2rem;
-  line-height: 1.2;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid hsla(72, 80%, 68%, 0.35);
+  box-shadow: 0 16px 40px hsla(151, 52%, 5%, 0.35);
 }
 
-.invitation-modal__button {
+.greet-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, hsla(72, 75%, 45%, 0.4), transparent);
+  pointer-events: none;
+}
+
+.greet-card__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--title-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 1;
+}
+
+.greet-card__close i {
+  pointer-events: none;
+}
+
+.greet-card__close:hover {
+  transform: scale(1.1);
+  color: var(--first-color);
+}
+
+.greet-card__heading {
+  font-size: var(--smaller-font-size);
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+}
+
+.greet-card__message {
+  font-family: var(--second-font);
+  font-size: var(--biggest-font-size);
+  color: var(--title-color);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.greet-card__note {
+  color: var(--title-color);
+  font-size: var(--normal-font-size);
+  line-height: 1.5;
+  max-width: 28rem;
+}
+
+.greet-card--interactive {
+  position: relative;
+  perspective: 1200px;
+}
+
+.greet-card--interactive .greet-card__lid {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 58%;
+  background: linear-gradient(145deg, hsla(151, 52%, 30%, 0.95), hsla(72, 75%, 45%, 0.6));
+  border-radius: inherit;
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform 0.7s cubic-bezier(0.42, 0, 0.34, 1.24), opacity 0.4s ease;
+  box-shadow: inset 0 8px 20px hsla(0, 0%, 0%, 0.25);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.greet-card--interactive.is-open .greet-card__lid {
+  transform: rotateX(115deg) translateY(-10px) scale(1.02);
+  opacity: 0;
+}
+
+.greet-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 3;
+}
+
+.greet-card__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid hsla(72, 80%, 68%, 0.5);
+  background: hsla(151, 80%, 28%, 0.2);
+  color: var(--title-color);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.greet-card__toggle i {
+  transition: transform 0.3s ease;
+}
+
+.greet-card__toggle:hover {
+  transform: translateY(-2px);
+  background: hsla(151, 80%, 28%, 0.35);
+}
+
+.greet-card.is-open .greet-card__toggle i {
+  transform: rotate(180deg);
+}
+
+.greet-card__body {
   margin-top: 1.5rem;
-  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.greet-card--interactive .greet-card__body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: max-height 0.65s cubic-bezier(0.36, 0.01, 0.2, 0.99),
+    opacity 0.4s ease, transform 0.5s ease;
+}
+
+.greet-card--interactive.is-open .greet-card__body {
+  max-height: 800px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.greet-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.greet-page__container {
+  width: min(700px, 100%);
+}
+
+.greet-card--standalone {
+  margin-bottom: 0;
+}
+
+.greet-page__actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /*=============== BREAKPOINTS ===============*/
@@ -606,5 +709,51 @@ img {
   .home__blob {
     left: -100%;
     top: 0;
+  }
+}
+.greet-card--animated {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(-90deg);
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+.greet-card--animated.is-open {
+  animation: greet-card-open 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.greet-card--animated.is-closing {
+  animation: greet-card-close 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34) forwards;
+}
+
+@keyframes greet-card-open {
+  0% {
+    opacity: 0;
+    transform: perspective(1200px) rotateX(-90deg) scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: perspective(1200px) rotateX(-45deg) scale(0.95);
+  }
+  80% {
+    transform: perspective(1200px) rotateX(5deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1200px) rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes greet-card-close {
+  0% {
+    opacity: 1;
+    transform: perspective(1200px) rotateX(0deg) scale(1);
+  }
+  30% {
+    transform: perspective(1200px) rotateX(5deg) scale(0.98);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(1200px) rotateX(-95deg) scale(0.85);
   }
 }

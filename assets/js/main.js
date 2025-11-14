@@ -39,11 +39,6 @@ const loginPage = document.getElementById('login-page'),
     submitCodeBtn = document.getElementById('submit-code'),
     errorMessage = document.getElementById('error-message')
 
-const invitationModal = document.getElementById('invitation-modal'),
-    modalMessage = document.getElementById('modal-message'),
-    invitationModalClose = document.getElementById('invitation-modal-close'),
-    modalContinueButton = document.getElementById('modal-continue-button')
-
 const employeeCodes = {
     '123': 'Баярсайхан',
     '456': 'Мөнхбат',
@@ -51,6 +46,14 @@ const employeeCodes = {
 }
 
 let currentEmployeeName = '';
+const STORAGE_KEY = 'greetEmployeeName';
+const storedEmployeeName = localStorage.getItem(STORAGE_KEY);
+
+if (storedEmployeeName) {
+    currentEmployeeName = storedEmployeeName;
+    loginPage.classList.add('hidden');
+    mainContent.classList.remove('hidden');
+}
 
 const christmasCountdown = () => {
     let now = new Date(),
@@ -123,38 +126,10 @@ submitCodeBtn.addEventListener('click', () => {
     if (employeeCodes[code]) {
         currentEmployeeName = employeeCodes[code];
         errorMessage.textContent = '';
-        loginPage.classList.add('hidden');
-
-        modalMessage.innerHTML = `Эрхэм ${currentEmployeeName}, Шинэ жилийн мэнд хүргэе!`;
-        invitationModal.classList.add('show-modal');
+        localStorage.setItem(STORAGE_KEY, currentEmployeeName);
+        window.location.href = `greeting.html?name=${encodeURIComponent(currentEmployeeName)}`;
 
     } else {
         errorMessage.textContent = 'Буруу код. Дахин оролдоно уу.';
     }
-});
-
-// Close modal when clicking on (x)
-invitationModalClose.addEventListener('click', () => {
-    invitationModal.classList.remove('show-modal');
-    mainContent.classList.remove('hidden');
-    christmasCountdown();
-    setInterval(christmasCountdown, 1000);
-});
-
-// Close modal when clicking outside of it
-window.addEventListener('click', (event) => {
-    if (event.target == invitationModal) {
-        invitationModal.classList.remove('show-modal');
-        mainContent.classList.remove('hidden');
-        christmasCountdown();
-        setInterval(christmasCountdown, 1000);
-    }
-});
-
-// Continue to main content from modal button
-modalContinueButton.addEventListener('click', () => {
-    invitationModal.classList.remove('show-modal');
-    mainContent.classList.remove('hidden');
-    christmasCountdown();
-    setInterval(christmasCountdown, 1000);
 });

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!--=============== FAVICON ===============-->
+   <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+   <!--=============== REMIXICONS ===============-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.6.0/remixicon.css">
+
+   <!--=============== CSS ===============-->
+   <link rel="stylesheet" href="assets/css/styles.css">
+
+   <title>Happy New Year Greeting</title>
+</head>
+
+<body class="greet-page">
+   <main class="greet-page__container">
+      <div class="greet-card greet-card--standalone greet-card--animated" id="greeting-card">
+         <button class="greet-card__close" id="greet-card-close" aria-label="Мэндчилгээ хаах">
+            <i class="ri-close-line"></i>
+         </button>
+         <p class="greet-card__heading">Мэндчилгээнээ хүлээн авна уу</p>
+         <p class="greet-card__message">
+            Эрхэм <span id="greeting-name"></span>, Шинэ жилийн мэнд хүргэе!
+         </p>
+         <p class="greet-card__note">
+            Баярын гал халуун уур амьсгалаар хайртай хүмүүстэйгээ хамтдаа гэгээлэг дурсамжуудыг бүтээж, инээд
+            хөөрөөр дүүрэн жил угтан авцгаая.
+         </p>
+
+         <div class="greet-page__actions">
+            <button type="button" class="button" id="greet-card-continue">Үргэлжлүүлэх</button>
+         </div>
+      </div>
+   </main>
+
+   <script>
+      (function () {
+         const params = new URLSearchParams(window.location.search);
+         const storedName = localStorage.getItem('greetEmployeeName');
+         const employeeName = params.get('name') || storedName || 'Баярсайхан';
+         const greetingName = document.getElementById('greeting-name');
+         const greetingCard = document.getElementById('greeting-card');
+         const continueButton = document.getElementById('greet-card-continue');
+         const closeButton = document.getElementById('greet-card-close');
+         if (greetingName) {
+            greetingName.textContent = employeeName;
+         }
+
+         const openCard = () => {
+            if (!greetingCard) return;
+            requestAnimationFrame(() => {
+               greetingCard.classList.add('is-open');
+            });
+         };
+
+         const closeCardWithAnimation = (callback) => {
+            if (!greetingCard) {
+               callback?.();
+               return;
+            }
+            if (greetingCard.classList.contains('is-closing')) {
+               return;
+            }
+            greetingCard.classList.remove('is-open');
+            greetingCard.classList.add('is-closing');
+
+            const handleAnimationEnd = () => {
+               greetingCard.classList.add('hidden');
+               greetingCard.removeEventListener('animationend', handleAnimationEnd);
+               callback?.();
+            };
+
+            greetingCard.addEventListener('animationend', handleAnimationEnd);
+         };
+
+         openCard();
+
+         continueButton?.addEventListener('click', () => {
+            closeCardWithAnimation(() => {
+               window.location.href = 'index.html';
+            });
+         });
+
+         closeButton?.addEventListener('click', () => {
+            closeCardWithAnimation(() => {
+               window.location.href = 'index.html';
+            });
+         });
+      })();
+   </script>
+</body>
+
+</html>
