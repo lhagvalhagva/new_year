@@ -29,28 +29,28 @@
          <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
                <li class="nav__item">
-                  <a href="#" class="nav__link active-link">
+                  <a href="#home" class="nav__link active-link" data-section="home">
                      <span>01</span> Home
                   </a>
                </li>
 
                <li class="nav__item">
-                  <a href="#" class="nav__link">
-                     <span>02</span> Card
+                  <a href="#card-section" class="nav__link" data-section="card">
+                     <span>02</span> Monito 
                   </a>
                </li>
 
                <li class="nav__item">
-                  <a href="#" class="nav__link">
+                  <a href="#agenda-section" class="nav__link" data-section="agenda">
                      <span>03</span> Agenda
                   </a>
                </li>
             </ul>
 
             <div class="nav__buttons">
-               <div class="nav__notification">
+               <div class="nav__notification" id="nav-notification">
                   <img src="assets/img/bell.png" alt="image" class="nav__bell">
-                  <div class="nav__circle">2</div>
+                  <div class="nav__circle">1</div>
                </div>
 
                <a href="#" class="button button__dark">Send a Card</a>
@@ -84,7 +84,7 @@
    <!--==================== MAIN ====================-->
    <main class="main hidden" id="main-content">
       <!--==================== HOME ====================-->
-      <section class="home">
+      <section class="home section" id="home">
          <div class="home__container container">
             <img src="assets/img/santa.png" alt="image" class="home__img">
 
@@ -113,7 +113,259 @@
             <div class="home__blob"></div>
          </div>
       </section>
+
+      <!--==================== CARD ====================-->
+      <section class="card section hidden" id="card-section">
+         <div class="card__container container">
+            <div class="monito-phases">
+               <h2 class="monito-phases__title">Монито-н үе шатууд</h2>
+               <table class="monito-phases__table">
+                  <thead>
+                     <tr>
+                        <th>Агуулга</th>
+                        <th>Хугацаа</th>
+                        <th>Төсөв</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>Шинэ жилийн уур амьсгал оруулъя</td>
+                        <td>11/24-11/28</td>
+                        <td>50,000</td>
+                     </tr>
+                     <tr>
+                        <td>Хоромхон амралт бэлэглэх</td>
+                        <td>12/01-12/05</td>
+                        <td>50,000</td>
+                     </tr>
+                     <tr>
+                        <td>Танд үлдээе</td>
+                        <td>12/08-12/12</td>
+                        <td>50,000</td>
+                     </tr>
+                     <tr>
+                        <td>Хямдхан ч сэтгэлтэй шүү</td>
+                        <td>12/15-12/19</td>
+                        <td>20-30</td>
+                     </tr>
+                     <tr>
+                        <td>Karma Gift Box</td>
+                        <td>12/19</td>
+                        <td>200,000</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </section>
+
+      <!--==================== AGENDA ====================-->
+      <section class="agenda section hidden" id="agenda-section">
+         <div class="agenda__container container">
+            <h2 class="agenda__title">Шинэ жилийн үйл ажиллагааны төлөвлөгөө</h2>
+            
+            <div class="advent-calendar">
+               <img src="assets/img/advent_calendar.png" alt="Advent Calendar" class="advent-calendar__image">
+            </div>
+
+            <div class="agenda__list">
+               <div class="agenda__item" data-day="1" data-month="12">
+                  <div class="agenda__day">1</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Эртэч шувуухай өдөр</h3>
+                     <p class="agenda__description">Эрт босвол нэгийг авна ккк</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="2" data-month="12">
+                  <div class="agenda__day">2</div>
+                  <div class="agenda__content">
+                     <p class="agenda__description">Always Smile</p>
+                     <h3 class="agenda__activity">Бусдадаа муухай ааш гаргадаггүй өдөр</h3>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="3" data-month="12">
+                  <div class="agenda__day">3</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Emoji-гаар ярьдаг өдөр</h3>
+                     <p class="agenda__description">Өнөөдөр бол emoji-гаар ярьдаг өдөр</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="4" data-month="12">
+                  <div class="agenda__day">4</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">CLICK2</h3>
+                     <p class="agenda__description">Удирдлага тайгаа сэлфиддэг өдөр</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="5" data-month="12">
+                  <div class="agenda__day">5</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Шоколад өгдөг өдөр</h3>
+                     <p class="agenda__description">Ямар ч шалтгаангүй ажлынхаа хэн нэгэнд Шоколад өгдөг өдөр</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="8" data-month="12">
+                  <div class="agenda__day">8</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Өөрийгөө шагнах өдөр</h3>
+                     <p class="agenda__description">Өөрийгөө шагнах өдөр</p>
+                  </div>
+               </div>
+
+
+               <div class="agenda__item" data-day="9" data-month="12">
+                  <div class="agenda__day">9</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">1 зураг = +10 араакишин</h3>
+                     <p class="agenda__description">Ажлын группрүү тайлбаргүйгээр рандом зураг илгээ</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="10" data-month="12">
+                  <div class="agenda__day">10</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Шинэ жилтэй холбоотой тете явуулдаг өдөр</h3>
+                     <p class="agenda__description">Шинэ жилтэй холбоотой тете явуулдаг өдөр</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="11" data-month="12">
+                  <div class="agenda__day">11</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Ажлын хамтрагчдаа санаа тавих өдөр</h3>
+                     <p class="agenda__description">Ажлын хамтрагчдаа санаа тавих Өдөр</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="12" data-month="12">
+                  <div class="agenda__day">12</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Жинжилийн кинотой, амттантай, дулаахан яриатай үдэш</h3>
+                     <p class="agenda__description">Жинжилийн кинотой, амттантай, дулаахан яриатай үдэш</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="15" data-month="12">
+                  <div class="agenda__day">15</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Бяцхан бэлгийн өдөр</h3>
+                     <p class="agenda__description">*Бяцхан бэлгийн өдөр</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="16" data-month="12">
+                  <div class="agenda__day">16</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">2025 оны хамгийн гоё дурсамжаа бичих өдөр</h3>
+                     <p class="agenda__description">2025 оны хамгийн гоё дурсамжаа бичих өдөр</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="17" data-month="12">
+                  <div class="agenda__day">17</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Ширээгээ цэгцлэх өдөр</h3>
+                     <p class="agenda__description">Ширээгээ цэгцлэх өдөр</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="18" data-month="12">
+                  <div class="agenda__day">18</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Талархлын өдөр</h3>
+                     <p class="agenda__description">Талархлын өдөр 3н  хүнд талархлын чат бичих</p>
+                  </div>
+               </div>
+               <div class="agenda__item" data-day="19" data-month="12">
+                  <div class="agenda__day">19</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Өнөөдөр Бидниййййй..</h3>
+                     <p class="agenda__description">Өнөөдөр Бидниййййй..</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="20" data-month="12">
+                  <div class="agenda__day">20</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Шарталт дэй</h3>
+                     <p class="agenda__description">Шарталт дэй</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="24" data-month="11">
+                  <div class="agenda__day">24</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Монита Өдөр</h3>
+                     <p class="agenda__description">Бэлгээ авъяааа.... мартаагүй биз</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="25" data-month="11">
+                  <div class="agenda__day">26</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Шинэ жилийн "Хөгжимтөй өдөр"</h3>
+                     <p class="agenda__description">Шинэ жилийн "Хөгжимтөй өдөр"</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="26" data-month="11">
+                  <div class="agenda__day">25</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">Улс Тунхагласны баяр</h3>
+                     <p class="agenda__description">Улс Тунхагласны баяр юм байнашдээ. Монгол хүн байнадаа амар 2</p>
+                  </div>
+               </div>
+
+
+               <div class="agenda__item" data-day="27" data-month="11">
+                  <div class="agenda__day">27</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">ВИТАМИН ЖУУЛАХ ӨДӨР</h3>
+                     <p class="agenda__description">ВИТАМИН ЖУУЛАХ ӨДӨР</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="28" data-month="11">
+                  <div class="agenda__day">28</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">АНХНЫ ХӨГЖӨӨНТ ӨДӨР. ТА ЯАРЧ БАЙНА УУ, БИД ЯАРЧ БАЙНА</h3>
+                     <p class="agenda__description">АНХНЫ ХӨГЖӨӨНТ ӨДӨР. ТА ЯАРЧ БАЙНА УУ, БИД ЯАРЧ БАЙНА</p>
+                  </div>
+               </div>
+
+               <div class="agenda__item" data-day="31" data-month="12">
+                  <div class="agenda__day">31</div>
+                  <div class="agenda__content">
+                     <h3 class="agenda__activity">ШИНЭ ЖИЛ – ШИНЭ ЭХЛЭЛ- ШИНЭ ТӨСЛҮҮД</h3>
+                     <p class="agenda__description">ШИНЭ ЖИЛ – ШИНЭ ЭХЛЭЛ- ШИНЭ ТӨСЛҮҮД</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
    </main>
+
+   <!--==================== TODAY'S EVENT MODAL ====================-->
+   <div class="event-modal hidden" id="event-modal">
+      <div class="event-modal__overlay" id="event-modal-overlay"></div>
+      <div class="event-modal__content">
+         <button class="event-modal__close" id="event-modal-close">
+            <i class="ri-close-line"></i>
+         </button>
+         <div class="event-modal__header">
+            <h2 class="event-modal__title">Өнөөдрийн үйл ажиллагаа</h2>
+            <div class="event-modal__day" id="event-modal-day"></div>
+         </div>
+         <div class="event-modal__body" id="event-modal-body">
+            <p class="event-modal__no-event">Өнөөдөр тусгай үйл ажиллагаа байхгүй байна.</p>
+         </div>
+      </div>
+   </div>
 
    <!--=============== SNOW JS ===============-->
    <script src="https://app.embed.im/snow.js" defer></script>

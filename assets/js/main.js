@@ -27,6 +27,69 @@ const linkAction = () => {
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
+/*=============== SECTION NAVIGATION ===============*/
+const sectionMap = {
+    'home': 'home',
+    'card': 'card-section',
+    'agenda': 'agenda-section'
+}
+
+const showSection = (sectionName) => {
+    const targetSectionId = sectionMap[sectionName]
+    if (!targetSectionId) return
+
+    const sections = document.querySelectorAll('.section')
+    const navLinks = document.querySelectorAll('.nav__link[data-section]')
+
+    sections.forEach(section => {
+        if (section.id === targetSectionId) {
+            section.classList.remove('hidden')
+        } else {
+            section.classList.add('hidden')
+        }
+    })
+
+    navLinks.forEach(link => {
+        if (link.getAttribute('data-section') === sectionName) {
+            link.classList.add('active-link')
+        } else {
+            link.classList.remove('active-link')
+        }
+    })
+}
+
+const navLinks = document.querySelectorAll('.nav__link[data-section]')
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault()
+        const sectionName = link.getAttribute('data-section')
+        showSection(sectionName)
+    })
+})
+
+/*=============== SORT AGENDA CHRONOLOGICALLY ===============*/
+const sortAgendaChronologically = () => {
+    const agendaList = document.querySelector('.agenda__list')
+    if (!agendaList) return
+
+    const items = Array.from(agendaList.querySelectorAll('.agenda__item'))
+    
+    items.sort((a, b) => {
+        const dayA = parseInt(a.getAttribute('data-day') || a.querySelector('.agenda__day').textContent.trim())
+        const dayB = parseInt(b.getAttribute('data-day') || b.querySelector('.agenda__day').textContent.trim())
+        return dayA - dayB
+    })
+
+    items.forEach(item => agendaList.appendChild(item))
+}
+
+// Sort agenda when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', sortAgendaChronologically)
+} else {
+    sortAgendaChronologically()
+}
+
 /*=============== DAY COUNTER FOR CHRISTMAS ===============*/
 const titleData = document.getElementById('title-data'),
     numberData = document.getElementById('number-data'),
@@ -133,3 +196,96 @@ submitCodeBtn.addEventListener('click', () => {
         errorMessage.textContent = 'Буруу код. Дахин оролдоно уу.';
     }
 });
+
+/*=============== TODAY'S EVENT MODAL ===============*/
+const navNotification = document.getElementById('nav-notification')
+const eventModal = document.getElementById('event-modal')
+const eventModalOverlay = document.getElementById('event-modal-overlay')
+const eventModalClose = document.getElementById('event-modal-close')
+const eventModalDay = document.getElementById('event-modal-day')
+const eventModalBody = document.getElementById('event-modal-body')
+
+const getCurrentDate = () => {
+    const now = new Date()
+    const currentMonth = now.getMonth() + 1
+    const currentDay = now.getDate()
+    
+    if ((currentMonth === 11 && currentDay >= 24 && currentDay <= 28) || 
+        (currentMonth === 12 && currentDay >= 1 && currentDay <= 31)) {
+        return { month: currentMonth, day: currentDay }
+    }
+    return null
+}
+
+const findTodayEvent = () => {
+    const today = getCurrentDate()
+    if (!today) return null
+
+    const agendaItems = document.querySelectorAll('.agenda__item')
+    const todayEvents = []
+
+    agendaItems.forEach(item => {
+        const itemMonth = parseInt(item.getAttribute('data-month')) || 12 // Default 12 сар
+        const itemDay = parseInt(item.getAttribute('data-day'))
+        
+        if (itemMonth === today.month && itemDay === today.day) {
+            const activity = item.querySelector('.agenda__activity')?.textContent || ''
+            const description = item.querySelector('.agenda__description')?.textContent || ''
+            todayEvents.push({ activity, description, day: today.day, month: today.month })
+        }
+    })
+
+    return todayEvents.length > 0 ? todayEvents : null
+}
+
+const showTodayEvent = () => {
+    const events = findTodayEvent()
+    const today = getCurrentDate()
+
+    if (!today) {
+        eventModalDay.textContent = ''
+        eventModalBody.innerHTML = '<p class="event-modal__no-event">Ямар нэг үйл ажиллагаа байхгүй байна.</p>'
+    } else {
+        const monthName = today.month === 11 ? '11 сарын' : '12 сарын'
+        eventModalDay.textContent = `${monthName} ${today.day} өдөр`
+        
+        if (events && events.length > 0) {
+            eventModalBody.innerHTML = events.map(event => `
+                <div class="event-modal__event">
+                    <h3 class="event-modal__activity">${event.activity}</h3>
+                    <p class="event-modal__description">${event.description}</p>
+                </div>
+            `).join('')
+        } else {
+            eventModalBody.innerHTML = '<p class="event-modal__no-event">Өнөөдөр тусгай үйл ажиллагаа байхгүй байна.</p>'
+        }
+    }
+
+    eventModal.classList.remove('hidden')
+}
+
+const hideEventModal = () => {
+    eventModal.classList.add('hidden')
+}
+
+if (navNotification) {
+    navNotification.addEventListener('click', (e) => {
+        e.stopPropagation()
+        showTodayEvent()
+    })
+}
+
+if (eventModalOverlay) {
+    eventModalOverlay.addEventListener('click', hideEventModal)
+}
+
+if (eventModalClose) {
+    eventModalClose.addEventListener('click', hideEventModal)
+}
+
+// ESC товч дарахад modal хаагдах
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !eventModal.classList.contains('hidden')) {
+        hideEventModal()
+    }
+})
