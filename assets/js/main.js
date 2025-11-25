@@ -144,11 +144,11 @@ const christmasCountdown = () => {
 
     let nextChristmasYear = now.getFullYear()
 
-    if (currentMonth == 12 && currentDay > 31) {
+    if (currentMonth == 12 && currentDay > 19) {
         nextChristmasYear += 1
     }
 
-    let nextChristmasDate = `Dec 31, ${nextChristmasYear} 00:00:00`,
+    let nextChristmasDate = `Dec 19, ${nextChristmasYear} 00:00:00`,
         christmasDay = new Date(nextChristmasDate),
         timeLeft = christmasDay - now
 
@@ -157,8 +157,7 @@ const christmasCountdown = () => {
         minutes = 0,
         seconds = 0
 
-    // Don't calculate the time left if it is Christmas day
-    if (currentMonth != 12 || (currentMonth == 12 && currentDay != 31)) {
+    if (currentMonth != 12 || (currentMonth == 12 && currentDay != 19)) {
         days = Math.floor(timeLeft / 1000 / 60 / 60 / 24)
         hours = Math.floor(timeLeft / 1000 / 60 / 60) % 24
         minutes = Math.floor(timeLeft / 1000 / 60) % 64
@@ -188,7 +187,7 @@ const christmasCountdown = () => {
     }
 
     // Show message on Christmas Day
-    if (currentMonth == 12 && currentDay == 31) {
+    if (currentMonth == 12 && currentDay == 19) {
         titleData.style.display = 'none'
         msgChristmas.style.display = 'block'
         msgChristmas.innerHTML = `Эрхэм ${currentEmployeeName}, Зул сарын баярын мэнд хүргэе!`
@@ -244,7 +243,7 @@ const getCurrentDate = () => {
     const currentDay = now.getDate()
     
     if ((currentMonth === 11 && currentDay >= 24 && currentDay <= 28) || 
-        (currentMonth === 12 && currentDay >= 1 && currentDay <= 31)) {
+        (currentMonth === 12 && currentDay >= 1 && currentDay <= 19)) {
         return { month: currentMonth, day: currentDay }
     }
     return null
