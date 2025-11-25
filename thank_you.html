@@ -84,64 +84,94 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             line-height: 1.2;
         }
 
-        p {
-            color: #E0E0E0;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            font-weight: 400;
+        /* --- Input Form Style --- */
+        .name-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 30;
         }
 
-        /* --- Button --- */
-        .btn {
-            display: inline-flex;
+        .name-input {
+            flex: 1;
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .name-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .name-input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .send-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #021B15;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: linear-gradient(45deg, #D41420, #FF4D4D);
-            color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1) rotate(-10deg);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .send-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* Success Message hidden by default */
+        .success-msg {
+            display: none;
+            color: #FFD700;
+            font-size: 1.5rem;
             font-weight: bold;
-            box-shadow: 0 10px 25px rgba(212, 20, 32, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
+            margin-top: 1.5rem;
+            animation: popIn 0.5s ease;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(212, 20, 32, 0.6);
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            20% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        /* --- Floating Stickers (The Fun Part) --- */
+        /* --- Floating Stickers --- */
         .sticker {
             position: absolute;
             font-size: 3rem;
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
             animation: floatSticker 3s ease-in-out infinite alternate;
             z-index: 20;
+            pointer-events: none;
         }
 
         .s1 { top: -30px; left: -20px; animation-delay: 0s; font-size: 4rem; transform: rotate(-15deg); }
@@ -163,18 +193,17 @@
             pointer-events: none;
         }
         
-        /* Mobile adjustments */
         @media (max-width: 480px) {
-            h1 { font-size: 2.8rem; }
+            h1 { font-size: 2.5rem; }
             .sticker { font-size: 2.5rem; }
             .s1 { font-size: 3rem; }
+            .card { padding: 2.5rem 1.2rem; }
         }
     </style>
 </head>
 <body>
 
     <canvas id="confetti"></canvas>
-
     <div id="snow-container"></div>
 
     <div class="container">
@@ -186,16 +215,18 @@
 
             <span class="title-emoji">🎉</span>
             <h1>Монитодоо баярлалаа!</h1>
-            <!-- <p>
-                Гоё<br>
-                <span style="color: #FFD700; font-weight: bold;">гайхалтай</span> байлаа! 😍<br>
-                Шинэ оны мэнд! 🥂
-            </p> -->
             
-            <!-- <a href="index.html" class="btn">
-                <span>Буцах</span>
-                <i class="ri-arrow-right-line"></i>
-            </a> -->
+            <form class="name-form" id="santaForm">
+                <input type="text" class="name-input" placeholder="Нэрээ бичээрэй.. Мэджга шүү xD" required autocomplete="off">
+                <button type="submit" class="send-btn">
+                    <i class="ri-send-plane-fill"></i>
+                </button>
+            </form>
+
+            <div class="success-msg" id="successMsg">
+                Илгээгдлээ! ✅
+            </div>
+
         </div>
     </div>
 
@@ -203,7 +234,7 @@
     // 1. Snow Effect
     function createSnow() {
         const container = document.getElementById('snow-container');
-        const count = 30; // Number of snowflakes
+        const count = 30; 
         const emojis = ['❄️', '❅', '❆', '✨'];
         
         for(let i=0; i<count; i++) {
@@ -218,27 +249,27 @@
         }
     }
 
-    // 2. Confetti Effect (Simple JS Implementation)
+    // 2. Confetti Logic
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
     let confetti = [];
     const colors = ['#ffd700', '#ff0000', '#00ff00', '#ffffff', '#0000ff'];
 
-    function ConfettiParticle() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height - canvas.height;
+    function ConfettiParticle(forceBurst = false) {
+        this.x = forceBurst ? canvas.width / 2 : Math.random() * canvas.width;
+        this.y = forceBurst ? canvas.height / 2 : Math.random() * canvas.height - canvas.height;
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.size = Math.random() * 10 + 5;
-        this.speedY = Math.random() * 3 + 2;
-        this.speedX = Math.random() * 2 - 1;
+        this.speedY = forceBurst ? (Math.random() * 10 - 5) : (Math.random() * 3 + 2);
+        this.speedX = forceBurst ? (Math.random() * 10 - 5) : (Math.random() * 2 - 1);
         
         this.update = function() {
             this.y += this.speedY;
             this.x += this.speedX;
-            if (this.y > canvas.height) {
+            // Gravity effect for burst
+            if(forceBurst) this.speedY += 0.1; 
+
+            if (!forceBurst && this.y > canvas.height) {
                 this.y = -10;
                 this.x = Math.random() * canvas.width;
             }
@@ -253,19 +284,48 @@
     }
 
     function initConfetti() {
-        for (let i = 0; i < 100; i++) {
+        // Continuous confetti
+        for (let i = 0; i < 50; i++) {
             confetti.push(new ConfettiParticle());
+        }
+    }
+
+    function burstConfetti() {
+        // Burst effect on submit
+        for (let i = 0; i < 100; i++) {
+            confetti.push(new ConfettiParticle(true));
         }
     }
 
     function animateConfetti() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
         for (let i = 0; i < confetti.length; i++) {
             confetti[i].update();
             confetti[i].draw();
         }
         requestAnimationFrame(animateConfetti);
     }
+
+    // 3. Form Handling
+    const form = document.getElementById('santaForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputVal = form.querySelector('input').value;
+        if(inputVal.trim() !== "") {
+            // Trigger explosion
+            burstConfetti();
+            
+            // UI Change
+            form.style.display = 'none';
+            successMsg.style.display = 'block';
+            successMsg.innerHTML = `Буруу байлаа мэдэж байгаа гээд байхад`;
+        }
+    });
 
     // Initialize
     window.addEventListener('DOMContentLoaded', () => {
@@ -274,11 +334,6 @@
         animateConfetti();
     });
 
-    // Resize handler
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
 </script>
 </body>
 </html>
