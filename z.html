@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Гоё Хүснэгт — Нэрс</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    :root{
+      --bg: #0f172a;
+      --card: #0b1220;
+      --muted: #94a3b8;
+      --accent: linear-gradient(90deg,#7c3aed,#06b6d4);
+      --glass: rgba(255,255,255,0.04);
+      --row1: rgba(255,255,255,0.02);
+      --row2: rgba(255,255,255,0.01);
+      --accent-solid: #7c3aed;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071127 0%, #07112a 100%);font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#e6eef8}
+    .wrap{max-width:920px;margin:36px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);box-shadow: 0 6px 30px rgba(2,6,23,0.6)}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .title{display:flex;gap:14px;align-items:center}
+    .logo{width:52px;height:52px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow: 0 6px 18px rgba(124,58,237,0.18)}
+    .title h1{margin:0;font-size:18px}
+    .title p{margin:0;color:var(--muted);font-size:13px}
+    .controls{display:flex;gap:8px;align-items:center}
+    input.search{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);min-width:220px;background:transparent;color:inherit}
+    button{border:0;padding:10px 12px;border-radius:10px;background:var(--glass);color:inherit;cursor:pointer}
+    .btn-accent{background:var(--accent);color:white;box-shadow: 0 6px 20px rgba(12,74,110,0.12)}
+    table{width:100%;border-collapse:collapse;margin-top:14px}
+    thead th{ text-align:left;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--muted)}
+    tbody tr{transition:background .16s, transform .08s}
+    tbody tr:hover{background:rgba(255,255,255,0.02);transform:translateY(-2px)}
+    td{padding:12px 14px;vertical-align:middle;font-size:15px}
+    .idcell{font-weight:600;color:#cce7ff;min-width:64px}
+    .namecell{display:flex;gap:12px;align-items:center}
+    .avatar{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+    tbody tr:nth-child(odd){background:var(--row1)}
+    tbody tr:nth-child(even){background:var(--row2)}
+    .muted{color:var(--muted);font-size:13px}
+    .actions{display:flex;gap:8px}
+    @media (max-width:640px){
+      .controls{flex-direction:column;align-items:stretch}
+      input.search{width:100%}
+      .logo{display:none}
+    }
+    .footer{margin-top:18px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <div class="logo">Н</div>
+        <div>
+          <h1>Нэрийн жагсаалт</h1>
+          <p>ID болон нэрс — гоё, уншихад амар</p>
+        </div>
+      </div>
+      <div class="controls">
+        <input id="q" class="search" placeholder="Хайх... (жишээ: Лхагва)" />
+        <button id="download" class="btn-accent">CSV татаж авах</button>
+        <button id="copy">Клипбоард руу</button>
+      </div>
+    </header>
+
+    <table id="tbl">
+      <thead>
+        <tr>
+          <th>🆔 ID</th>
+          <th>👤 Нэр</th>
+          <th class="muted">Тэмдэглэл</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="footer">
+      <div>Нийт: <span id="count">0</span></div>
+      <div class="muted">Өөрчлөлт хүсвэл хэлээрэй — би засна :)</div>
+    </div>
+  </div>
+
+  <script>
+    const data = [
+      {id:101,name:'Алтандуулга'},
+      {id:102,name:'Алтанцэцэг'},
+      {id:103,name:'Бадмаараг'},
+      {id:104,name:'Бат-Оргил'},
+      {id:105,name:'Дарамбазар'},
+      {id:106,name:'Инабат'},
+      {id:107,name:'Лхагвадорж'},
+      {id:108,name:'Лхагвасугар'},
+      {id:109,name:'Мягмарсүрэн'},
+      {id:110,name:'Мөнхзул'},
+      {id:111,name:'Намхай'},
+      {id:112,name:'Нандинзаяа'},
+      {id:113,name:'Номин'},
+      {id:114,name:'Нямхүү'},
+      {id:115,name:'Одбаяр Даваацэрэн'},
+      {id:116,name:'Оюунтунгалаг'},
+      {id:117,name:'Пүрэвсүрэн'},
+      {id:118,name:'Солонго'},
+      {id:119,name:'Тэнгис'},
+      {id:120,name:'Төгөлдөрчимэг'},
+      {id:121,name:'Энхманлай'},
+      {id:122,name:'Энхтүвшин'}
+    ];
+
+    const tbody = document.querySelector('#tbl tbody');
+    const countEl = document.getElementById('count');
+
+    function initials(name){
+      const parts = name.split(/\s+/).filter(Boolean);
+      if(parts.length===1) return parts[0].slice(0,2).toUpperCase();
+      return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+    }
+
+    function render(list){
+      tbody.innerHTML='';
+      list.forEach(item=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="idcell">${item.id}</td>
+          <td>
+            <div class="namecell">
+              <div class="avatar">${initials(item.name)}</div>
+              <div>
+                <div style="font-weight:600">${item.name}</div>
+                <div class="muted">ID: ${item.id}</div>
+              </div>
+            </div>
+          </td>
+          <td class="muted">&nbsp;</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      countEl.textContent = list.length;
+    }
+
+    render(data);
+
+    // Search
+    document.getElementById('q').addEventListener('input', (e)=>{
+      const q = e.target.value.trim().toLowerCase();
+      if(!q) return render(data);
+      const filtered = data.filter(d => String(d.id).includes(q) || d.name.toLowerCase().includes(q));
+      render(filtered);
+    });
+
+    // CSV download
+    function toCSV(arr){
+      const header = ['ID','Name'];
+      const rows = arr.map(r => [r.id, '"'+String(r.name).replace(/"/g,'""')+'"']);
+      return [header.join(','), ...rows.map(r=>r.join(','))].join('\n');
+    }
+
+    document.getElementById('download').addEventListener('click', ()=>{
+      const csv = toCSV(data);
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'names_list.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    // Copy visible table to clipboard as CSV
+    document.getElementById('copy').addEventListener('click', async ()=>{
+      const visible = Array.from(tbody.querySelectorAll('tr')).map(r=>{
+        const id = r.querySelector('.idcell').textContent.trim();
+        const name = r.querySelector('.namecell div:nth-child(2) div').textContent.trim();
+        return {id,name};
+      });
+      const csv = toCSV(visible);
+      try{
+        await navigator.clipboard.writeText(csv);
+        alert('Хүснэгтийн мэдээлэл clipboad руу амжилттай хууллаа.');
+      }catch(err){
+        alert('Клипбоард руу хуулж чадсангүй. Та браузерийн тохиргоог шалгана уу.');
+      }
+    });
+  </script>
+</body>
+</html>

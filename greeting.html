@@ -731,22 +731,29 @@
 
          <div class="card-content">
             <div class="header">
-               <h1 class="header-title">
+               <h1 class="header-title" style="font-size: 4rem;">
                   <i class="ri-sparkling-fill header-icon"></i>
-                  Шинэ жилийн мэнд хүргэе
+                  Урилга
                   <i class="ri-sparkling-fill header-icon"></i>
                </h1>
             </div>
 
             <div class="greeting">
                <p class="greeting-text">Эрхэм хүндэт</p>
-               <h2 class="greeting-name" id="greeting-name">Баярсайхан</h2>
+               <h2 class="greeting-name" id="greeting-name"></h2>
                <p class="greeting-message">
                   "HAPPY 2025" шинэ жилийн баярын цэнгүүд хүрэлцэн ирж нэгэн сайхан дурсамжит үдшийг хамт өнгрүүлэхийг
                   урьж байна 🥂
                </p>
             </div>
-
+            <div class="poem">
+               <p class="poem-text">
+                  Цаг хугацааны түүх болон үлдсэн хуучин оноо<br>
+                  Цаглашгүй их амжилт үйлсээр үдэж<br>
+                  Он цагийн тооллоор учран золгож байгаа шинэ жилийг<br>
+                  Од хийморь, орчлонгийн сайн сайхан бүхнийг билэгдэн угтацгаая ✨
+               </p>
+            </div>
             <div class="details">
                <div class="detail-item">
                   <div class="detail-icon">
@@ -785,16 +792,6 @@
                   </div>
                </div>
             </div>
-
-            <div class="poem">
-               <p class="poem-text">
-                  Цаг хугацааны түүх болон үлдсэн хуучин оноо<br>
-                  Цаглашгүй их амжилт үйлсээр үдэж<br>
-                  Он цагийн тооллоор учран золгож байгаа шинэ жилийг<br>
-                  Од хийморь, орчлонгийн сайн сайхан бүхнийг билэгдэн угтацгаая ✨
-               </p>
-            </div>
-
             <button class="action-btn" id="continue-btn">
                <span class="btn-text">Үргэлжлүүлэх</span>
                <i class="ri-arrow-right-line btn-icon"></i>
@@ -892,7 +889,7 @@
 
       // Get name from URL or storage
       const params = new URLSearchParams(window.location.search);
-      const storedName = sessionStorage.getItem('greetEmployeeName');
+      const storedName = localStorage.getItem('greetEmployeeName') || sessionStorage.getItem('greetEmployeeName');
       const employeeName = params.get('name') || storedName || 'Баярсайхан';
 
       const greetingNameEl = document.getElementById('greeting-name');
@@ -928,7 +925,6 @@
          });
       });
 
-      // Initialize
       createSnowflakes();
 
       // Start New Year animation when page loads

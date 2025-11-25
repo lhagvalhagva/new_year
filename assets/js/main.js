@@ -216,6 +216,20 @@ submitCodeBtn.addEventListener('click', () => {
     }
 });
 
+/*=============== GREET BUTTON ===============*/
+const greetButton = document.getElementById('greet-button');
+if (greetButton) {
+    greetButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const employeeName = localStorage.getItem(STORAGE_KEY) || currentEmployeeName;
+        if (employeeName) {
+            window.location.href = `greeting.html?name=${encodeURIComponent(employeeName)}`;
+        } else {
+            window.location.href = 'greeting.html';
+        }
+    });
+}
+
 /*=============== TODAY'S EVENT MODAL ===============*/
 const navNotification = document.getElementById('nav-notification')
 const eventModal = document.getElementById('event-modal')
