@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="mn">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.6.0/remixicon.css">
+   <link href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet">
    <title>Урилга - Шинэ жилийн баяр 2025</title>
    <style>
       * {
@@ -14,10 +16,14 @@
 
       :root {
          --primary-gold: #ffd700;
-         --primary-dark: #0a2f1f; /* Dark Green */
-         --primary-blue: #134e39; /* Forest Green */
-         --accent-purple: #c1272d; /* Christmas Red */
-         --accent-pink: #ff9100; /* Warm Orange/Gold accent */
+         --primary-dark: #0a2f1f;
+         /* Dark Green */
+         --primary-blue: #134e39;
+         /* Forest Green */
+         --accent-purple: #c1272d;
+         /* Christmas Red */
+         --accent-pink: #ff9100;
+         /* Warm Orange/Gold accent */
          --text-light: #ffffff;
          --text-gold: #ffd700;
          --glass-bg: rgba(10, 47, 31, 0.6);
@@ -44,7 +50,7 @@
          left: 0;
          width: 100%;
          height: 100%;
-         background: 
+         background:
             radial-gradient(circle at 20% 50%, rgba(193, 39, 45, 0.15) 0%, transparent 50%),
             radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
             radial-gradient(circle at 40% 20%, rgba(20, 90, 60, 0.2) 0%, transparent 50%);
@@ -53,8 +59,15 @@
       }
 
       @keyframes backgroundShift {
-         0%, 100% { opacity: 0.3; }
-         50% { opacity: 0.6; }
+
+         0%,
+         100% {
+            opacity: 0.3;
+         }
+
+         50% {
+            opacity: 0.6;
+         }
       }
 
       /* Snow Effect */
@@ -88,6 +101,7 @@
             opacity: 0;
             transform: translateY(30px);
          }
+
          to {
             opacity: 1;
             transform: translateY(0);
@@ -100,7 +114,7 @@
          backdrop-filter: blur(20px);
          border-radius: 30px;
          padding: 3rem 2rem;
-         box-shadow: 
+         box-shadow:
             0 8px 32px rgba(0, 0, 0, 0.4),
             inset 0 1px 0 rgba(255, 255, 255, 0.2),
             0 0 60px rgba(19, 78, 57, 0.3);
@@ -111,8 +125,15 @@
       }
 
       @keyframes cardFloat {
-         0%, 100% { transform: translateY(0px); }
-         50% { transform: translateY(-10px); }
+
+         0%,
+         100% {
+            transform: translateY(0px);
+         }
+
+         50% {
+            transform: translateY(-10px);
+         }
       }
 
       /* Card Glow Effect */
@@ -128,8 +149,13 @@
       }
 
       @keyframes rotate {
-         from { transform: rotate(0deg); }
-         to { transform: rotate(360deg); }
+         from {
+            transform: rotate(0deg);
+         }
+
+         to {
+            transform: rotate(360deg);
+         }
       }
 
       .card-content {
@@ -170,8 +196,13 @@
       }
 
       @keyframes fadeIn {
-         from { opacity: 0; }
-         to { opacity: 1; }
+         from {
+            opacity: 0;
+         }
+
+         to {
+            opacity: 1;
+         }
       }
 
       .header-title {
@@ -190,8 +221,15 @@
       }
 
       @keyframes shimmer {
-         0%, 100% { filter: brightness(1); }
-         50% { filter: brightness(1.3); }
+
+         0%,
+         100% {
+            filter: brightness(1);
+         }
+
+         50% {
+            filter: brightness(1.3);
+         }
       }
 
       .header-icon {
@@ -200,8 +238,15 @@
       }
 
       @keyframes pulse {
-         0%, 100% { transform: scale(1); }
-         50% { transform: scale(1.2); }
+
+         0%,
+         100% {
+            transform: scale(1);
+         }
+
+         50% {
+            transform: scale(1.2);
+         }
       }
 
       /* Greeting */
@@ -229,8 +274,15 @@
       }
 
       @keyframes glow {
-         0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
-         50% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
+
+         0%,
+         100% {
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+         }
+
+         50% {
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+         }
       }
 
       .greeting-message {
@@ -282,7 +334,7 @@
          border-radius: 12px;
          font-size: 1.5rem;
          color: white;
-         box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       }
 
       .detail-content {
@@ -377,8 +429,15 @@
       }
 
       @keyframes slideRight {
-         0%, 100% { transform: translateX(0); }
-         50% { transform: translateX(5px); }
+
+         0%,
+         100% {
+            transform: translateX(0);
+         }
+
+         50% {
+            transform: translateX(5px);
+         }
       }
 
       .btn-text {
@@ -396,8 +455,15 @@
       }
 
       @keyframes float {
-         0%, 100% { transform: translateY(0) rotate(0deg); }
-         50% { transform: translateY(-20px) rotate(10deg); }
+
+         0%,
+         100% {
+            transform: translateY(0) rotate(0deg);
+         }
+
+         50% {
+            transform: translateY(-20px) rotate(10deg);
+         }
       }
 
       .decoration-1 {
@@ -487,6 +553,7 @@
             opacity: 1;
             transform: scale(1);
          }
+
          to {
             opacity: 0;
             transform: scale(0.9);
@@ -496,11 +563,162 @@
       .is-closing {
          animation: fadeOut 0.5s ease-out forwards;
       }
+
+      /* New Year Animation Overlay */
+      .new-year-animation {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background: linear-gradient(135deg, #051f15 0%, #0a2f1f 50%, #134e39 100%);
+         z-index: 1000;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex-direction: column;
+         opacity: 1;
+         transition: opacity 0.5s ease-out;
+      }
+
+      .new-year-animation.hidden {
+         opacity: 0;
+         pointer-events: none;
+      }
+
+      #countdown {
+         font-family: 'Agbalumo', serif;
+         font-size: 8rem;
+         color: #ffd700;
+         text-shadow:
+            0 0 20px rgba(255, 215, 0, 0.8),
+            0 0 40px rgba(255, 215, 0, 0.6),
+            0 0 60px rgba(255, 215, 0, 0.4);
+         animation: countdownPulse 0.5s ease-in-out;
+         z-index: 1001;
+         position: relative;
+      }
+
+      @keyframes countdownPulse {
+
+         0%,
+         100% {
+            transform: scale(1);
+         }
+
+         50% {
+            transform: scale(1.2);
+         }
+      }
+
+      #fireworks {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         pointer-events: none;
+         z-index: 1002;
+      }
+
+      .spark {
+         position: absolute;
+         width: 4px;
+         height: 4px;
+         border-radius: 50%;
+         animation: sparkAnimation 1s ease-out forwards;
+      }
+
+      @keyframes sparkAnimation {
+         0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+         }
+
+         100% {
+            opacity: 0;
+            transform: translate(var(--x), var(--y)) scale(0);
+         }
+      }
+
+      #confetti {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         pointer-events: none;
+         z-index: 1003;
+         overflow: hidden;
+      }
+
+      .confetti-piece {
+         position: absolute;
+         width: 10px;
+         height: 10px;
+         background: var(--color);
+         animation: confettiFall linear forwards;
+      }
+
+      @keyframes confettiFall {
+         0% {
+            transform: translateY(-100vh) rotate(0deg);
+            opacity: 1;
+         }
+
+         100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+         }
+      }
+
+      .new-year-text {
+         font-family: 'Agbalumo', serif;
+         font-size: 3rem;
+         color: #ffd700;
+         text-shadow:
+            0 0 20px rgba(255, 215, 0, 0.8),
+            0 0 40px rgba(255, 215, 0, 0.6);
+         margin-top: 2rem;
+         animation: textFadeIn 1s ease-out;
+         z-index: 1001;
+         position: relative;
+      }
+
+      @keyframes textFadeIn {
+         from {
+            opacity: 0;
+            transform: translateY(20px);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      /* Hide greeting card initially */
+      .container {
+         opacity: 0;
+         transition: opacity 0.8s ease-in;
+      }
+
+      .container.show {
+         opacity: 1;
+      }
    </style>
 </head>
 
 <body>
-   <div class="container">
+   <!-- New Year Animation Overlay -->
+   <div class="new-year-animation" id="new-year-animation">
+      <div id="countdown">5</div>
+      <div id="fireworks"></div>
+      <div id="confetti"></div>
+      <div class="new-year-text" id="new-year-text" style="display: none;">Happy New Year!</div>
+   </div>
+
+   <div class="container" id="main-container">
       <div class="card" id="greeting-card">
          <div class="decoration decoration-1">🎄</div>
          <div class="decoration decoration-2">✨</div>
@@ -524,7 +742,8 @@
                <p class="greeting-text">Эрхэм хүндэт</p>
                <h2 class="greeting-name" id="greeting-name">Баярсайхан</h2>
                <p class="greeting-message">
-                  "HAPPY 2025" шинэ жилийн баярын цэнгүүд хүрэлцэн ирж нэгэн сайхан дурсамжит үдшийг хамт өнгрүүлэхийг урьж байна 🥂
+                  "HAPPY 2025" шинэ жилийн баярын цэнгүүд хүрэлцэн ирж нэгэн сайхан дурсамжит үдшийг хамт өнгрүүлэхийг
+                  урьж байна 🥂
                </p>
             </div>
 
@@ -562,7 +781,7 @@
                            Улаанбаатар зочид буудал
                         </a>
                      </div>
-                     
+
                   </div>
                </div>
             </div>
@@ -585,6 +804,76 @@
    </div>
 
    <script>
+      // New Year Animation Functions
+      const countdown = document.getElementById('countdown');
+      const fireworks = document.getElementById('fireworks');
+      const confettiContainer = document.getElementById('confetti');
+      const newYearAnimation = document.getElementById('new-year-animation');
+      const newYearText = document.getElementById('new-year-text');
+      const mainContainer = document.getElementById('main-container');
+
+      function randomColor() {
+         const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFA500', '#FFD700'];
+         return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      function createFireworks() {
+         for (let i = 0; i < 30; i++) {
+            const spark = document.createElement('div');
+            spark.classList.add('spark');
+            fireworks.appendChild(spark);
+
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const angle = Math.random() * 360;
+            const distance = 50 + Math.random() * 100;
+
+            spark.style.left = x + '%';
+            spark.style.top = y + '%';
+            spark.style.background = randomColor();
+            spark.style.setProperty('--x', Math.cos(angle * Math.PI / 180) * distance + 'px');
+            spark.style.setProperty('--y', Math.sin(angle * Math.PI / 180) * distance + 'px');
+            spark.style.animationDelay = Math.random() * 0.5 + 's';
+         }
+      }
+
+      function createConfetti() {
+         const confettiCount = 100;
+         for (let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti-piece');
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = randomColor();
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confettiContainer.appendChild(confetti);
+         }
+      }
+
+      function startCountdown() {
+         let number = 5;
+         countdown.textContent = number;
+
+         const countdownInterval = setInterval(() => {
+            number--;
+            if (number > 0) {
+               countdown.textContent = number;
+            } else {
+               clearInterval(countdownInterval);
+               countdown.textContent = '';
+               newYearText.style.display = 'block';
+               createFireworks();
+               createConfetti();
+
+               // Hide animation after 3 seconds and show greeting card
+               setTimeout(() => {
+                  newYearAnimation.classList.add('hidden');
+                  mainContainer.classList.add('show');
+               }, 3000);
+            }
+         }, 1000);
+      }
+
       // Snow effect
       function createSnowflakes() {
          const snowflakeCount = 50;
@@ -605,7 +894,7 @@
       const params = new URLSearchParams(window.location.search);
       const storedName = sessionStorage.getItem('greetEmployeeName');
       const employeeName = params.get('name') || storedName || 'Баярсайхан';
-      
+
       const greetingNameEl = document.getElementById('greeting-name');
       if (greetingNameEl) {
          greetingNameEl.textContent = employeeName;
@@ -615,32 +904,38 @@
       function closeCard(callback) {
          const card = document.getElementById('greeting-card');
          if (!card) {
-               callback?.();
-               return;
-            }
-         
+            callback?.();
+            return;
+         }
+
          card.classList.add('is-closing');
          setTimeout(() => {
             card.classList.add('hidden');
-               callback?.();
+            callback?.();
          }, 500);
       }
 
       // Event listeners
       document.getElementById('continue-btn')?.addEventListener('click', () => {
          closeCard(() => {
-               window.location.href = 'index.html';
-            });
+            window.location.href = 'index.html';
          });
+      });
 
       document.getElementById('close-btn')?.addEventListener('click', () => {
          closeCard(() => {
-               window.location.href = 'index.html';
-            });
+            window.location.href = 'index.html';
          });
+      });
 
       // Initialize
       createSnowflakes();
+
+      // Start New Year animation when page loads
+      window.addEventListener('DOMContentLoaded', () => {
+         startCountdown();
+      });
    </script>
 </body>
+
 </html>
