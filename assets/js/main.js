@@ -302,7 +302,6 @@ if (eventModalClose) {
     eventModalClose.addEventListener('click', hideEventModal)
 }
 
-// ESC товч дарахад modal хаагдах
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !eventModal.classList.contains('hidden')) {
         hideEventModal()
